@@ -1,0 +1,135 @@
+@import "tailwindcss";
+@import "@xyflow/react/dist/style.css";
+
+:root {
+  --background: #080e1a;
+  --foreground: #e2e8f0;
+  --accent-primary: #6366f1;
+  --accent-add: #22c55e;
+  --accent-delete: #ef4444;
+  --accent-search: #f59e0b;
+  --accent-trie: #8b5cf6;
+  --hover-glow: rgba(99, 102, 241, 0.3);
+  --hover-border: #818cf8;
+  --hover-bg: rgba(99, 102, 241, 0.1);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: "Inter", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* React Flow overrides */
+.react-flow__panel { display: none !important; }
+.react-flow__background { background: transparent !important; }
+.react-flow__node { transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1); }
+.react-flow__edge-textwrapper { pointer-events: none; }
+
+/* Edge label styling: background rectangles with subtle borders */
+.react-flow__edge-text { font-size: 11px !important; }
+.react-flow__edge-textbg {
+  rx: 4 !important;
+  ry: 4 !important;
+}
+
+/* Keyframe Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInFromTop {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 8px var(--hover-glow); }
+  50%      { box-shadow: 0 0 20px var(--hover-glow), 0 0 40px rgba(99,102,241,0.12); }
+}
+
+@keyframes nodeInsertPulse {
+  0%   { filter: brightness(1); }
+  25%  { filter: brightness(1.4); }
+  50%  { filter: brightness(1); }
+  75%  { filter: brightness(1.2); }
+  100% { filter: brightness(1); }
+}
+
+@keyframes pathTraverse {
+  0%   { stroke-dashoffset: 100; }
+  100% { stroke-dashoffset: 0; }
+}
+
+@keyframes searchGlow {
+  0%, 100% { box-shadow: 0 0 6px rgba(245, 158, 11, 0.25); }
+  50%      { box-shadow: 0 0 14px rgba(245, 158, 11, 0.45), 0 0 28px rgba(245, 158, 11, 0.15); }
+}
+
+@keyframes insertGlow {
+  0%, 100% { box-shadow: 0 0 6px rgba(34, 197, 94, 0.25); }
+  50%      { box-shadow: 0 0 14px rgba(34, 197, 94, 0.45), 0 0 28px rgba(34, 197, 94, 0.15); }
+}
+
+@keyframes deleteGlow {
+  0%, 100% { box-shadow: 0 0 6px rgba(239, 68, 68, 0.25); }
+  50%      { box-shadow: 0 0 14px rgba(239, 68, 68, 0.45), 0 0 28px rgba(239, 68, 68, 0.15); }
+}
+
+/* Animation Utility Classes */
+.animate-in { animation: fadeIn 0.3s ease-out; }
+.animate-slide-in-top { animation: slideInFromTop 0.3s ease-out; }
+.animate-search-glow { animation: searchGlow 1.5s ease-in-out infinite; }
+.animate-insert-glow { animation: insertGlow 1.5s ease-in-out infinite; }
+.animate-delete-glow { animation: deleteGlow 1.5s ease-in-out infinite; }
+.animate-node-insert { animation: nodeInsertPulse 1.2s ease-in-out; }
+
+/* Panel card transitions */
+.panel-card {
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.panel-card:hover {
+  border-color: rgba(71, 85, 105, 0.5);
+  box-shadow: 0 2px 16px rgba(0,0,0,0.15);
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #334155; }
+* { scrollbar-width: thin; scrollbar-color: #1e293b transparent; }
+
+.custom-scrollbar::-webkit-scrollbar { width: 4px; }
+.custom-scrollbar::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 2px; }
+
+/* Tooltip */
+.tree-node-tooltip {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #111827;
+  border: 1px solid rgba(71, 85, 105, 0.6);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 11px;
+  color: #e2e8f0;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 100;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+  animation: fadeIn 0.15s ease-out;
+}
+.tree-node-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: rgba(71, 85, 105, 0.6);
+}

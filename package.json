@@ -1,0 +1,8 @@
+{
+  "name": "dictionary-workspace",
+  "private": true,
+  "scripts": {
+    "dev:all": "node scripts/dev-all.js",
+    "dev:frontend": "npm --prefix frontend run dev"
+  }
+}
