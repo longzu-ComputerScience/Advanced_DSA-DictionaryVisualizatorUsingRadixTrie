@@ -29,7 +29,6 @@ A full-stack English dictionary application that uses a **Radix Trie (compressed
 | Backend | Python 3.11+, FastAPI, Pydantic |
 | Data Structure | Radix Trie (implemented from scratch) |
 | Persistence | Local JSON file |
-| Documents | python-docx (DOCX), reportlab (PDF) |
 
 ---
 
@@ -133,8 +132,7 @@ The web app will be available at [http://localhost:3000](http://localhost:3000).
 │   │   ├── schemas.py
 │   │   ├── radix_trie.py
 │   │   ├── storage.py
-│   │   ├── history.py
-│   │   └── docs_generator.py
+│   │   └── history.py
 │   ├── data/
 │   │   └── dictionary.json
 │   ├── requirements.txt
@@ -142,11 +140,7 @@ The web app will be available at [http://localhost:3000](http://localhost:3000).
 │       └── test_radix_trie.py
 │
 ├── User_Guide/
-│   ├── explain.md
-│   └── User Guide.docx
-│
-└── docs/
-    └── Application_Introduction.pdf
+│   └── explain.md
 ```
 
 ---
@@ -194,20 +188,6 @@ Key operations:
 | `DELETE` | `/api/words/{word}` | Delete a word |
 | `GET` | `/api/search?word=...` | Search for a word |
 | `GET` | `/api/history` | Get operation history |
-
----
-
-## Generated Documents
-
-- **`User_Guide/explain.md`** – Beginner-friendly explanation of Radix Trie
-- **`User_Guide/User Guide.docx`** – Formal usage guide (real DOCX file)
-- **`docs/Application_Introduction.pdf`** – Application introduction for submission (real PDF)
-
-To regenerate documents:
-```bash
-cd backend
-python -m app.docs_generator
-```
 
 ---
 
